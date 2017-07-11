@@ -53,3 +53,4 @@ $RECYCLE.BIN/
 sysinfo.txt
 
 # Project specific
+.DS_Store
