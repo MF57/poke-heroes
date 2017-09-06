@@ -89,7 +89,7 @@ public class Player : NetworkBehaviour, IPlayerInterface
 	[Client]
 	private bool isAttackable (Unit attacker, Unit attacked, HexPosition coordinates)
 	{
-		return attacked.PLAYER != player && coordinates.dist (attacked.Coordinates) <= attacker.RANGE;
+		return attacked.PLAYER != player && coordinates.dist (attacked.Coordinates) <= attacker.SPEED;
 	}
 
 	private bool isAttackable (Unit attacker, Unit attacked)

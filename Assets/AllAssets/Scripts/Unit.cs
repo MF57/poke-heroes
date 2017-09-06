@@ -14,12 +14,7 @@ public class Unit : MonoBehaviour
 
 	private State state = State.MOVE;
 	public int PLAYER;
-	public int MAX_HP;
 	private int hp;
-	public float STRENGTH;
-	public float VARIATION;
-	public int SPEED;
-	public int RANGE;
 	private int HP_BAR_WIDTH = 64;
 	private int HP_BAR_HEIGHT = 16;
 	private bool moving = false;
@@ -30,6 +25,22 @@ public class Unit : MonoBehaviour
 	private const float MOTION_SPEED = 0.05f;
 	private IPlayerInterface player = null;
 	private bool localPlayer = false;
+
+	public int MAX_HP;
+	public float ATTACK;
+	public float SP_ATTACK;
+	public float DEFENSE;
+	public float SP_DEFFENCE;
+	public int SPEED;
+
+
+	public PokemonType primaryType;
+	public PokemonType secondaryType;
+
+	public PokemonMove move1;
+	public PokemonMove move2;
+	public PokemonMove move3;
+	public PokemonMove move4;
 
 	public void setPlayerInterface (IPlayerInterface player, bool localPlayer)
 	{
@@ -116,7 +127,7 @@ public class Unit : MonoBehaviour
 
 	public int getDamage ()
 	{
-		return NegativeBinomialDistribution.fromMeanAndStandardDeviation (STRENGTH - 1, VARIATION) + 1;
+		return NegativeBinomialDistribution.fromMeanAndStandardDeviation (ATTACK - 1, 5) + 1;
 	}
 
 	public void attack (HexPosition enemy, int damage)
