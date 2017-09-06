@@ -99,7 +99,7 @@ public class AI
 			//find the best enemy in range to attack. If nobody is in range, do nothing.
 		} else {
 			if (unit.Coordinates.dist (target.Coordinates) <= unit.SPEED) {
-				unit.attack (target.Coordinates, unit.getDamage ());
+				unit.attack (target.Coordinates, unit.getDamage (target));
 				phase = Phase.MOVE;
 			} else {
 				target = null;
@@ -115,7 +115,7 @@ public class AI
 					}
 				}
 				if (target != null) {
-					unit.attack (target.Coordinates, unit.getDamage ());
+					unit.attack (target.Coordinates, unit.getDamage (target));
 				}
 				phase = Phase.MOVE;
 			}

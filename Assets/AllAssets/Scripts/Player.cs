@@ -407,7 +407,9 @@ public class Player : NetworkBehaviour, IPlayerInterface
 	[Command]
 	private void CmdUnitAttack (int[] attacker, int[] defender)
 	{
-		RpcUnitAttack (attacker, defender, HexPosition.intPairToHex (attacker).getUnit ().getDamage ());
+		Unit source = HexPosition.intPairToHex (attacker).getUnit ();
+		Unit target = HexPosition.intPairToHex (defender).getUnit ();
+		RpcUnitAttack (attacker, defender, source.getDamage(target));
 	}
 
 	[ClientRpc]

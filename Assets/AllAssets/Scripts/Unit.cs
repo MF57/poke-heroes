@@ -28,10 +28,11 @@ public class Unit : MonoBehaviour
 
 	public int MAX_HP;
 	public float ATTACK;
-	public float SP_ATTACK;
 	public float DEFENSE;
+	public float SP_ATTACK;
 	public float SP_DEFFENCE;
 	public int SPEED;
+
 
 
 	public PokemonType primaryType;
@@ -125,9 +126,12 @@ public class Unit : MonoBehaviour
 		state = State.WAIT;
 	}
 
-	public int getDamage ()
+	public int getDamage (Unit target)
 	{
-		return NegativeBinomialDistribution.fromMeanAndStandardDeviation (ATTACK - 1, 5) + 1;
+		System.Random random = new System.Random();
+	
+		double randomModifier = random.NextDouble() * (1 - 0.85) + 0.85;
+		return (int) ((((22 * 40 * (this.ATTACK / target.DEFENSE)) / 50) + 2) * randomModifier);
 	}
 
 	public void attack (HexPosition enemy, int damage)

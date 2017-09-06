@@ -173,7 +173,7 @@ public class HexGrid : MonoBehaviour, IPlayerInterface
 	private void actuallyAttack ()
 	{
 		Unit unit = selection.getUnit ();
-		unit.attack (mouse, unit.getDamage ());
+		unit.attack (mouse, unit.getDamage (mouse.getUnit()));
 		checkGameOver ();
 		unselect ();
 	}
