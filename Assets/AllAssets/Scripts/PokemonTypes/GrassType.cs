@@ -2,15 +2,20 @@
 using System.Collections.Generic;
 
 public class GrassType : PokemonType {
-	override public List<PokemonType> notVeryEffectiveTypes() {
-		return new List<PokemonType> () { new FireType(), new GrassType(), new PoisonType(), new FlyingType(), new BugType(), new DragonType()};
+	override public List<PokemonTypeEnum> notVeryEffectiveTypes() {
+		return new List<PokemonTypeEnum> () { PokemonTypeEnum.FIRE, PokemonTypeEnum.GRASS, PokemonTypeEnum.POISON, PokemonTypeEnum.FLYING, PokemonTypeEnum.BUG, PokemonTypeEnum.DRAGON};
 	}
-	override public List<PokemonType> superEffectiveTypes() {
-		return new List<PokemonType> () { new WaterType(), new GroundType(), new RockType()};
+	override public List<PokemonTypeEnum> superEffectiveTypes() {
+		return new List<PokemonTypeEnum> () { PokemonTypeEnum.WATER, PokemonTypeEnum.GROUND, PokemonTypeEnum.ROCK};
 	}
 
-	override public List<PokemonType> immuneTypes(){
-		return new List<PokemonType> () {};
+	override public List<PokemonTypeEnum> immuneTypes(){
+		return new List<PokemonTypeEnum> () {};
+	}
+
+	public override PokemonTypeEnum typeEnum ()
+	{
+		return PokemonTypeEnum.GRASS;
 	}
 }
 

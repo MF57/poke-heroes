@@ -2,15 +2,20 @@
 using System.Collections.Generic;
 
 public class DragonType : PokemonType {
-	override public List<PokemonType> notVeryEffectiveTypes() {
-		return new List<PokemonType> () {new SteelType()};
+	override public List<PokemonTypeEnum> notVeryEffectiveTypes() {
+		return new List<PokemonTypeEnum> () {PokemonTypeEnum.STEEL};
 	}
-	override public List<PokemonType> superEffectiveTypes() {
-		return new List<PokemonType> () {new DragonType()};
+	override public List<PokemonTypeEnum> superEffectiveTypes() {
+		return new List<PokemonTypeEnum> () {PokemonTypeEnum.DRAGON};
 	}
 
-	override public List<PokemonType> immuneTypes(){
-		return new List<PokemonType> () {new FairyType()};
+	override public List<PokemonTypeEnum> immuneTypes(){
+		return new List<PokemonTypeEnum> () {PokemonTypeEnum.FAIRY};
+	}
+
+	public override PokemonTypeEnum typeEnum ()
+	{
+		return PokemonTypeEnum.DRAGON;
 	}
 }
 

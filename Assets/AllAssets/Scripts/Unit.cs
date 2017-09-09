@@ -55,26 +55,6 @@ public class Unit : MonoBehaviour
 		}
 	}
 	
-	/*void SetPosition (HexPosition position) {
-		this.position = position;
-		transform.position = position.getPosition ();
-		position.add ("Unit", this);
-		grid.SendMessage ("ActionComplete");
-	}
-	
-	public void Move (HexPosition desitination) {
-		grid.SendMessage ("MessageRecieved");
-		if (desitination.containsKey ("Unit")) {
-			grid.SendMessage ("ActionComplete");
-			return;
-		}
-		position.delete ("Unit");
-		desitination.add ("Unit", this);
-		transform.position = desitination.getPosition();
-		position = desitination;
-		grid.SendMessage ("ActionComplete");
-	}*/
-	
 	public HexPosition Coordinates {
 		get {
 			return position;
@@ -109,7 +89,6 @@ public class Unit : MonoBehaviour
 		}
 		position.remove ("Unit");
 		destination.add ("Unit", this);
-		//transform.position = desitination.getPosition();
 		t = 0;
 		n = 0;
 		moving = true;
@@ -128,10 +107,53 @@ public class Unit : MonoBehaviour
 
 	public int getDamage (Unit target)
 	{
+		PokemonMove move = getRandomMove ();
+		double statsModifier = 0;
+		if (move.kind == MoveKind.PSYCHICAL) {
+			statsModifier = this.ATTACK / target.DEFENSE;
+		} else {
+			statsModifier = this.SP_ATTACK / target.SP_DEFFENCE;
+		}
+		Debug.Log ("Used move: " + move.moveName);
 		System.Random random = new System.Random();
-	
 		double randomModifier = random.NextDouble() * (1 - 0.85) + 0.85;
-		return (int) ((((22 * 40 * (this.ATTACK / target.DEFENSE)) / 50) + 2) * randomModifier);
+
+		double criticalHitModifier = 1.0;
+		if (random.NextDouble () < 0.2) {
+			criticalHitModifier = 1.5;
+			Debug.Log ("Critical Hit!");
+		}
+
+		double accuracyModifier = 1.0;
+		if (random.NextDouble () > (move.accuracy / 100)) {
+			accuracyModifier = 0;
+			Debug.Log ("Attack have missed");
+		}
+
+		double primaryTypeModifier = move.Type.getEffectivnessMultiplier (target.primaryType);
+		double secondaryTypeModifier = 1;
+		if (target.secondaryType != null)
+			secondaryTypeModifier = move.Type.getEffectivnessMultiplier (target.secondaryType);
+
+		double typeModifier = primaryTypeModifier * secondaryTypeModifier;
+			
+		Debug.Log (((((88 / 5) * statsModifier) + 2) * randomModifier * criticalHitModifier * accuracyModifier * typeModifier));
+			
+		return (int) ((((88/5) * statsModifier) + 2) * randomModifier * criticalHitModifier * accuracyModifier * typeModifier);
+	}
+
+	private PokemonMove getRandomMove()
+	{
+		System.Random random = new System.Random();
+		int randomNumber = random.Next (1, 5);
+		if (randomNumber == 1)
+			return this.move1;
+		else if (randomNumber == 2)
+			return this.move2;
+		else if (randomNumber == 3)
+			return this.move3;
+		else
+			return this.move4;
 	}
 
 	public void attack (HexPosition enemy, int damage)
@@ -176,14 +198,7 @@ public class Unit : MonoBehaviour
 		}
 		return dir;
 	}
-	
-	/*private Quaternion bezierRotation (Vector3 p0, Vector3 c0, Vector3 c1, Vector3 p1, float t) {
-		Vector3 dir = dbezier (p0, c0, c1, p1, t);
-		dir.y = 0;
-		Quaternion rotation = new Quaternion ();
-		rotation.SetLookRotation (dir);
-		return rotation;
-	}*/
+
 	
 	private Quaternion horizontalLookRotation (Vector3 dir)
 	{

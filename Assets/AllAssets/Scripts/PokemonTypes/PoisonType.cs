@@ -2,15 +2,20 @@
 using System.Collections.Generic;
 
 public class PoisonType : PokemonType {
-	override public List<PokemonType> notVeryEffectiveTypes() {
-		return new List<PokemonType> () {new PoisonType(), new GroundType(), new RockType(), new GhostType()};
+	override public List<PokemonTypeEnum> notVeryEffectiveTypes() {
+		return new List<PokemonTypeEnum> () {PokemonTypeEnum.POISON, PokemonTypeEnum.GROUND, PokemonTypeEnum.ROCK, PokemonTypeEnum.GHOST};
 	}
-	override public List<PokemonType> superEffectiveTypes() {
-		return new List<PokemonType> () {new GrassType(), new FairyType()};
+	override public List<PokemonTypeEnum> superEffectiveTypes() {
+		return new List<PokemonTypeEnum> () {PokemonTypeEnum.GRASS, PokemonTypeEnum.FAIRY};
 	}
 
-	override public List<PokemonType> immuneTypes(){
-		return new List<PokemonType> () {new SteelType()};
+	override public List<PokemonTypeEnum> immuneTypes(){
+		return new List<PokemonTypeEnum> () {PokemonTypeEnum.STEEL};
+	}
+
+	public override PokemonTypeEnum typeEnum ()
+	{
+		return PokemonTypeEnum.POISON;
 	}
 }
 

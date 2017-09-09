@@ -2,15 +2,20 @@
 using System.Collections.Generic;
 
 public class FlyingType : PokemonType {
-	override public List<PokemonType> notVeryEffectiveTypes() {
-		return new List<PokemonType> () {new ElectricType(), new RockType(), new SteelType()};
+	override public List<PokemonTypeEnum> notVeryEffectiveTypes() {
+		return new List<PokemonTypeEnum> () {PokemonTypeEnum.ELECTRIC, PokemonTypeEnum.ROCK, PokemonTypeEnum.STEEL};
 	}
-	override public List<PokemonType> superEffectiveTypes() {
-		return new List<PokemonType> () {new GrassType(), new FightningType(), new BugType()};
+	override public List<PokemonTypeEnum> superEffectiveTypes() {
+		return new List<PokemonTypeEnum> () {PokemonTypeEnum.GRASS, PokemonTypeEnum.FIGHTNING, PokemonTypeEnum.BUG};
 	}
 
-	override public List<PokemonType> immuneTypes(){
-		return new List<PokemonType> () {};
+	override public List<PokemonTypeEnum> immuneTypes(){
+		return new List<PokemonTypeEnum> () {};
+	}
+
+	public override PokemonTypeEnum typeEnum ()
+	{
+		return PokemonTypeEnum.FLYING;
 	}
 }
 

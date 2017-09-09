@@ -3,15 +3,19 @@ using System.Collections.Generic;
 
 
 public class IceType : PokemonType {
-	override public List<PokemonType> notVeryEffectiveTypes() {
-		return new List<PokemonType> () {new FireType(), new WaterType(), new IceType(), new SteelType()};
+	override public List<PokemonTypeEnum> notVeryEffectiveTypes() {
+		return new List<PokemonTypeEnum> () {PokemonTypeEnum.FIRE, PokemonTypeEnum.WATER, PokemonTypeEnum.ICE, PokemonTypeEnum.STEEL};
 	}
-	override public List<PokemonType> superEffectiveTypes() {
-		return new List<PokemonType> () {new GrassType(), new GrassType(), new GroundType(), new DragonType()};
+	override public List<PokemonTypeEnum> superEffectiveTypes() {
+		return new List<PokemonTypeEnum> () {PokemonTypeEnum.GRASS, PokemonTypeEnum.ICE, PokemonTypeEnum.GROUND, PokemonTypeEnum.DRAGON};
 	}
 
-	override public List<PokemonType> immuneTypes(){
-		return new List<PokemonType> () {};
+	override public List<PokemonTypeEnum> immuneTypes(){
+		return new List<PokemonTypeEnum> () {};
+	}
+	public override PokemonTypeEnum typeEnum ()
+	{
+		return PokemonTypeEnum.ICE;
 	}
 }
 
