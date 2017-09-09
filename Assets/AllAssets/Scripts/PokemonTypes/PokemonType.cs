@@ -1,49 +1,45 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
+
+
+public abstract class PokemonTypes : MonoBehaviour
+{
+	public abstract List<PokemonTypes> notVeryEffectiveTypes();
+	public abstract List<PokemonTypes> superEffectiveTypes();
+	public abstract List<PokemonTypes> immuneTypes();
+}
 
 public interface PokemonType
 {
 	List<PokemonType> notVeryEffectiveTypes();
 	List<PokemonType> superEffectiveTypes();
 	List<PokemonType> immuneTypes();
-	double getEffectivnessMultiplier(PokemonType type);
 }
 
 
 public abstract class AbstractPokemonType : PokemonType
 {
-	public double getEffectivnessMultiplier(PokemonType type) 
-	{
-		if (((PokemonType)this).notVeryEffectiveTypes ().Contains (type)) {
-			return 0.5;
-		} else if (((PokemonType)this).superEffectiveTypes ().Contains (type)) {
-			return 2;
-		} else if (((PokemonType)this).immuneTypes ().Contains (type)) {
-			return 0;
-		} else {
-			return 1;
-		}
-			
-	}
+//	public double getEffectivnessMultiplier(PokemonType type) 
+//	{
+//		if (((PokemonType)this).notVeryEffectiveTypes ().Contains (type)) {
+//			return 0.5;
+//		} else if (((PokemonType)this).superEffectiveTypes ().Contains (type)) {
+//			return 2;
+//		} else if (((PokemonType)this).immuneTypes ().Contains (type)) {
+//			return 0;
+//		} else {
+//			return 1;
+//		}
+//
+//	}
 
 	public abstract List<PokemonType> notVeryEffectiveTypes ();
 	public abstract List<PokemonType> superEffectiveTypes ();
 	public abstract List<PokemonType> immuneTypes ();
 }
-
-public class NormalType : AbstractPokemonType {
-	override public List<PokemonType> notVeryEffectiveTypes() {
-		return new List<PokemonType> () { new RockType(), new SteelType()};
-	}
-	override public List<PokemonType> superEffectiveTypes() {
-		return new List<PokemonType> () {};
-	}
-
-	override public List<PokemonType> immuneTypes(){
-		return new List<PokemonType> () { new GhostType()};
-	}
-}
+	
 
 public class WaterType : AbstractPokemonType {
 	override public List<PokemonType> notVeryEffectiveTypes() {
@@ -180,7 +176,7 @@ public class FightningType : AbstractPokemonType {
 		return new List<PokemonType> () {new PoisonType(), new FlyingType(), new PsychicType(), new BugType(), new FairyType()};
 	}
 	override public List<PokemonType> superEffectiveTypes() {
-		return new List<PokemonType> () {new NormalType(), new IceType(), new RockType(), new SteelType()};
+		return new List<PokemonType> () {/*new NormalType(),*/ new IceType(), new RockType(), new SteelType()};
 	}
 
 	override public List<PokemonType> immuneTypes(){
@@ -223,7 +219,7 @@ public class GhostType : AbstractPokemonType {
 	}
 
 	override public List<PokemonType> immuneTypes(){
-		return new List<PokemonType> () {new NormalType()};
+		return new List<PokemonType> () {/*new NormalType()*/};
 	}
 }
 

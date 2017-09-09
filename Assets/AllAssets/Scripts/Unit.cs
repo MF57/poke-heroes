@@ -35,7 +35,7 @@ public class Unit : MonoBehaviour
 
 
 
-	public PokemonType primaryType;
+	public PokemonTypes primaryType;
 	public PokemonType secondaryType;
 
 	public PokemonMove move1;
