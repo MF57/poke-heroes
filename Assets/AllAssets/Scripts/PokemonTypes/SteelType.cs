@@ -6,7 +6,7 @@ public class SteelType : PokemonType {
 		return new List<PokemonTypeEnum> () {PokemonTypeEnum.FIRE, PokemonTypeEnum.ELECTRIC, PokemonTypeEnum.STEEL, PokemonTypeEnum.WATER};
 	}
 	override public List<PokemonTypeEnum> superEffectiveTypes() {
-		return new List<PokemonTypeEnum> () {PokemonTypeEnum.ICE, PokemonTypeEnum.ROCK, PokemonTypeEnum.STEEL};
+		return new List<PokemonTypeEnum> () {PokemonTypeEnum.ICE, PokemonTypeEnum.ROCK, PokemonTypeEnum.FAIRY};
 	}
 
 	override public List<PokemonTypeEnum> immuneTypes(){

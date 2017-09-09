@@ -121,7 +121,6 @@ public class Unit : MonoBehaviour
 		double criticalHitModifier = 1.0;
 		if (random.NextDouble () < 0.2) {
 			criticalHitModifier = 1.5;
-			Debug.Log ("Critical Hit!");
 		}
 
 		double accuracyModifier = 1.0;
@@ -136,10 +135,17 @@ public class Unit : MonoBehaviour
 			secondaryTypeModifier = move.Type.getEffectivnessMultiplier (target.secondaryType);
 
 		double typeModifier = primaryTypeModifier * secondaryTypeModifier;
-			
-		Debug.Log (((((88 / 5) * statsModifier) + 2) * randomModifier * criticalHitModifier * accuracyModifier * typeModifier));
-			
-		return (int) ((((88/5) * statsModifier) + 2) * randomModifier * criticalHitModifier * accuracyModifier * typeModifier);
+
+		if (typeModifier > 1 && accuracyModifier != 0) 
+			Debug.Log ("It's super effective");
+
+		if (typeModifier < 1 && accuracyModifier != 0)
+			Debug.Log ("It's not very effective");
+
+		if (criticalHitModifier > 1 && accuracyModifier != 0)
+			Debug.Log ("It's a critical hit");
+							
+		return (int) ((((((22 * statsModifier * move.basePower) / 50) + 2) * randomModifier * criticalHitModifier * accuracyModifier * typeModifier) / 100) * target.MAX_HP);
 	}
 
 	private PokemonMove getRandomMove()
