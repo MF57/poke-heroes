@@ -30,5 +30,7 @@ public class CameraController : MonoBehaviour {
 		{
 			transform.Translate(new Vector3(0, speed * Time.deltaTime * 0.6f, speed * Time.deltaTime));
 		}
+		if (Input.GetKey("escape"))
+			Application.Quit();
 	}
 }

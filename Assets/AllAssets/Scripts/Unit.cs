@@ -157,7 +157,7 @@ public class Unit : MonoBehaviour
 							
 		GameObject moveLabel = GameObject.Find ("MoveLabel");
 		if (moveLabel != null) {
-			moveLabel.GetComponent<Text> ().text = effectMessage;
+			moveLabel.GetComponent<Text> ().text = moveMessage;
 		}
 
 		GameObject criticalLabel = GameObject.Find ("CriticalLabel");
@@ -167,7 +167,7 @@ public class Unit : MonoBehaviour
 
 		GameObject effectivenessLabel = GameObject.Find ("EffectivenessLabel");
 		if (effectivenessLabel != null) {
-			effectivenessLabel.GetComponent<Text> ().text = moveMessage;
+			effectivenessLabel.GetComponent<Text> ().text = effectMessage;
 		}
 		return (int) ((((((22 * statsModifier * move.basePower) / 50) + 2) * randomModifier * criticalHitModifier * accuracyModifier * typeModifier) / 100) * target.MAX_HP);
 	}

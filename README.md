@@ -14,6 +14,7 @@ W pierwszej kolejności należy wybrać z menu w lewym górnym rogu, tryb jedno,
  Obaj zawodnicy otrzymują po 3 Pokemony rozstawione po bokach planszy (w przypadku trybu jednoosobowego pokemony gracza znajdują sie po prawej stronie).
  
  Gracz za pomocą strzałek może sterować kamerą.
+ Aby wyjść z gry, należy nacisnąć klawisz esc
  
  Rzogrywka jest turowa. Gracz, który jako pierwszy utraci wszystkie swoje pokemony przegrywa.
  
