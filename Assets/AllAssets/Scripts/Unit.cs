@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class Unit : MonoBehaviour
@@ -114,6 +115,7 @@ public class Unit : MonoBehaviour
 		} else {
 			statsModifier = this.SP_ATTACK / target.SP_DEFFENCE;
 		}
+		string eventMessage = "Used move: " + move.moveName;
 		Debug.Log ("Used move: " + move.moveName);
 		System.Random random = new System.Random();
 		double randomModifier = random.NextDouble() * (1 - 0.85) + 0.85;
@@ -126,6 +128,7 @@ public class Unit : MonoBehaviour
 		double accuracyModifier = 1.0;
 		if (random.NextDouble () > (move.accuracy / 100)) {
 			accuracyModifier = 0;
+			eventMessage = eventMessage + "\nAttack have missed";
 			Debug.Log ("Attack have missed");
 		}
 
@@ -136,15 +139,22 @@ public class Unit : MonoBehaviour
 
 		double typeModifier = primaryTypeModifier * secondaryTypeModifier;
 
-		if (typeModifier > 1 && accuracyModifier != 0) 
+		if (typeModifier > 1 && accuracyModifier != 0)
+			eventMessage = eventMessage + "\nIt's super effective";
 			Debug.Log ("It's super effective");
 
 		if (typeModifier < 1 && accuracyModifier != 0)
+			eventMessage = eventMessage + "\nIt's not very effective";
 			Debug.Log ("It's not very effective");
 
 		if (criticalHitModifier > 1 && accuracyModifier != 0)
+			eventMessage = eventMessage + "\nIt's a critical hit";
 			Debug.Log ("It's a critical hit");
 							
+		GameObject text = GameObject.Find ("EventLogger");
+		if (text != null) {
+			text.GetComponent<Text> ().text = eventMessage;
+		}
 		return (int) ((((((22 * statsModifier * move.basePower) / 50) + 2) * randomModifier * criticalHitModifier * accuracyModifier * typeModifier) / 100) * target.MAX_HP);
 	}
 
