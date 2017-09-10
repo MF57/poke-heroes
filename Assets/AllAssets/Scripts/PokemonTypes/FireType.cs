@@ -7,7 +7,7 @@ public class FireType : PokemonType {
 		return new List<PokemonTypeEnum> () {PokemonTypeEnum.FIRE, PokemonTypeEnum.WATER, PokemonTypeEnum.ROCK, PokemonTypeEnum.DRAGON};
 	}
 	override public List<PokemonTypeEnum> superEffectiveTypes() {
-		return new List<PokemonTypeEnum> () {};
+		return new List<PokemonTypeEnum> () {PokemonTypeEnum.GRASS, PokemonTypeEnum.BUG, PokemonTypeEnum.ICE, PokemonTypeEnum.STEEL};
 	}
 
 	override public List<PokemonTypeEnum> immuneTypes(){

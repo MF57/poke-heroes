@@ -136,6 +136,8 @@ public class Unit : MonoBehaviour
 			effectMessage = "Attack have missed";
 		}
 
+	
+
 		double primaryTypeModifier = move.Type.getEffectivnessMultiplier (target.primaryType);
 		double secondaryTypeModifier = 1;
 		if (target.secondaryType != null)
@@ -335,8 +337,7 @@ public class Unit : MonoBehaviour
 	{	//TODO: Get rid of magic numbers.
 		Vector3 coordinates = Camera.main.WorldToScreenPoint (transform.position + new Vector3 (0, 1.5f, 0) + 0.5f * Camera.main.transform.up);	//TODO: Make this some kind of constant.
 		coordinates.y = Screen.height - coordinates.y;
-		coordinates.z = -2000;
-		print (coordinates);
+
 		Texture2D red = new Texture2D (1, 1);
 		red.SetPixel (0, 0, Color.red);
 		red.wrapMode = TextureWrapMode.Repeat;
