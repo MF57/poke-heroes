@@ -120,7 +120,7 @@ public class Unit : MonoBehaviour
 		} else {
 			statsModifier = this.SP_ATTACK / target.SP_DEFFENCE;
 		}
-		string eventMessage = "Used move: " + move.moveName;
+		string moveMessage = "Used move: " + move.moveName;
 		System.Random random = new System.Random();
 		double randomModifier = random.NextDouble() * (1 - 0.85) + 0.85;
 
@@ -129,10 +129,11 @@ public class Unit : MonoBehaviour
 			criticalHitModifier = 1.5;
 		}
 
+		string effectMessage = "";
 		double accuracyModifier = 1.0;
 		if (random.NextDouble () > (move.accuracy / 100)) {
 			accuracyModifier = 0;
-			eventMessage = eventMessage + "\nAttack have missed";
+			effectMessage = "Attack have missed";
 		}
 
 		double primaryTypeModifier = move.Type.getEffectivnessMultiplier (target.primaryType);
@@ -143,18 +144,28 @@ public class Unit : MonoBehaviour
 		double typeModifier = primaryTypeModifier * secondaryTypeModifier;
 
 		if (typeModifier > 1 && accuracyModifier != 0)
-			eventMessage = eventMessage + "\nIt's super effective";
+			effectMessage = "It's super effective";
 
 		if (typeModifier < 1 && accuracyModifier != 0)
-			eventMessage = eventMessage + "\nIt's not very effective";
+			effectMessage = "It's not very effective";
 
+		string criticalMessage = "";
 		if (criticalHitModifier > 1 && accuracyModifier != 0)
-			eventMessage = eventMessage + "\nIt's a critical hit";
+			criticalMessage = "It's a critical hit";
 							
-		GameObject text = GameObject.Find ("EventLogger");
-		Debug.Log (eventMessage);
-		if (text != null) {
-			text.GetComponent<Text> ().text = eventMessage;
+		GameObject moveLabel = GameObject.Find ("MoveLabel");
+		if (moveLabel != null) {
+			moveLabel.GetComponent<Text> ().text = effectMessage;
+		}
+
+		GameObject criticalLabel = GameObject.Find ("CriticalLabel");
+		if (criticalLabel != null) {
+			criticalLabel.GetComponent<Text> ().text = criticalMessage;
+		}
+
+		GameObject effectivenessLabel = GameObject.Find ("EffectivenessLabel");
+		if (effectivenessLabel != null) {
+			effectivenessLabel.GetComponent<Text> ().text = moveMessage;
 		}
 		return (int) ((((((22 * statsModifier * move.basePower) / 50) + 2) * randomModifier * criticalHitModifier * accuracyModifier * typeModifier) / 100) * target.MAX_HP);
 	}
@@ -324,7 +335,8 @@ public class Unit : MonoBehaviour
 	{	//TODO: Get rid of magic numbers.
 		Vector3 coordinates = Camera.main.WorldToScreenPoint (transform.position + new Vector3 (0, 1.5f, 0) + 0.5f * Camera.main.transform.up);	//TODO: Make this some kind of constant.
 		coordinates.y = Screen.height - coordinates.y;
-		//print (coordinates);
+		coordinates.z = -2000;
+		print (coordinates);
 		Texture2D red = new Texture2D (1, 1);
 		red.SetPixel (0, 0, Color.red);
 		red.wrapMode = TextureWrapMode.Repeat;
