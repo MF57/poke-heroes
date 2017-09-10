@@ -58,15 +58,19 @@ public class AI
 
 	private HexPosition[] getPath (Unit unit, Unit enemy)
 	{
-		HexPosition[] path = AStar.search (unit.Coordinates, enemy.Coordinates, 64, unit.SPEED);
+		HexPosition[] path = AStar.search (unit.Coordinates, enemy.Coordinates, 64, 1);
 		if (path == null) {
 			return null;
 		}
-		if (path.Length <= unit.SPEED) {
+		if (path.Length <= 1) {
 			return path;
 		}
-		HexPosition[] new_path = new HexPosition[unit.SPEED];
-		for (int i = 0; i < new_path.Length; ++i) {
+		int length = unit.getRange();
+		if (path.Length < unit.getRange()) {
+			length = path.Length;
+		}
+		HexPosition[] new_path = new HexPosition[length];
+		for (int i = 0; i < length; ++i) {
 			new_path [i] = path [i];
 		}
 		return new_path;
@@ -98,14 +102,14 @@ public class AI
 			//If it's the attack phase, attack the target, or if you haven't gotten close enough,
 			//find the best enemy in range to attack. If nobody is in range, do nothing.
 		} else {
-			if (unit.Coordinates.dist (target.Coordinates) <= unit.SPEED) {
+			if (unit.Coordinates.dist (target.Coordinates) <= 1) {
 				unit.attack (target.Coordinates, unit.getDamage (target));
 				phase = Phase.MOVE;
 			} else {
 				target = null;
 				double score = 0;
 				foreach (Unit other_unit in units) {
-					if (other_unit.PLAYER == player || unit.Coordinates.dist (other_unit.Coordinates) > unit.SPEED) {
+					if (other_unit.PLAYER == player || unit.Coordinates.dist (other_unit.Coordinates) > 1) {
 						continue;
 					}
 					double new_score = other_unit.ATTACK / other_unit.HP;

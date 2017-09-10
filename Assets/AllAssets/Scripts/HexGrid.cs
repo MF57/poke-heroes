@@ -68,7 +68,7 @@ public class HexGrid : MonoBehaviour, IPlayerInterface
 	//TODO: Move to Unit.cs
 	private bool isAttackable (Unit attacker, Unit attacked, HexPosition coordinates)
 	{
-		return attacked.PLAYER != player && coordinates.dist (attacked.Coordinates) <= attacker.SPEED;
+		return attacked.PLAYER != player && coordinates.dist (attacked.Coordinates) <= 1;
 	}
 
 	private bool isAttackable (Unit attacker, Unit attacked)
@@ -273,7 +273,7 @@ public class HexGrid : MonoBehaviour, IPlayerInterface
 						Unit unit = selection.getUnit ();
 						HexPosition.clearSelection ("Path");
 						HexPosition.clearSelection ("Attack");
-						path = AStar.search (selection, mouse, unit.SPEED);
+						path = AStar.search (selection, mouse, unit.getRange());
 						HexPosition.select ("Path", path);
 						selectAttackable (unit, mouse);
 					}
