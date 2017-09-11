@@ -5,6 +5,8 @@ Gra zbudowana na bazie Hexagon Asset.
 
 Instrukcja:
 
+## Należy uruchomić scenę OneComputer znajdującą się w katalogu All_Assets
+
 W pierwszej kolejności należy wybrać z menu w lewym górnym rogu, tryb jedno, czy dwuosobowy:
  - w przypadku trybu jednoosobowego gracz staje do walki z prostym AI
  - w przypadku trybu dwuosobowego - dwóch graczy staje na przeciwko siebie do walki.
